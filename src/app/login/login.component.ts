@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import {  AngularFireDatabase, FirebaseObjectObservable } from 'angularfire2/database';
-import {  AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -11,22 +8,18 @@ import * as firebase from 'firebase/app';
 })
 export class LoginComponent implements OnInit {
 
-   user: Observable<firebase.User>;
-   item: FirebaseObjectObservable<any>;
-  constructor(public afAuth: AngularFireAuth, public db: AngularFireDatabase) {
-    this.user = afAuth.authState;
-    this.item = db.object('messages');
+  constructor(public loginService: LoginService) {  }
 
+  login(){
+    this.loginService.login();
+  }
+  logout(){
+    this.loginService.logout();
   }
 
-  login() {
-     this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
-   }
-   logout() {
-      this.afAuth.auth.signOut();
-   }
-
   ngOnInit() {
+
+
   }
 
 }
