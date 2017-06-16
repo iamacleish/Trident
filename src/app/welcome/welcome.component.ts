@@ -16,13 +16,16 @@ export class WelcomeComponent implements OnInit {
   item: FirebaseObjectObservable<any>;
 
   constructor(public loginService: LoginService) {
-    this.user = loginService.user;
+    this.user = loginService.authState;
     this.item = loginService.item;
+  }
 
+  logout(){
+    this.loginService.logout();
   }
 
   ngOnInit() {
-  
+
   }
 
 }
